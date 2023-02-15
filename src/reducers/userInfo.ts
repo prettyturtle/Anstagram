@@ -3,7 +3,7 @@ import { UserInfo } from "../@types/UserInfo";
 import { TypeUserInfoActions } from "../actions/user";
 
 export type TypeUserInfoReducer = {
-  userInfo: UserInfo[] | null;
+  userInfo: UserInfo | null;
   myFeedList: FeedInfo[];
 };
 
