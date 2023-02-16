@@ -11,6 +11,10 @@ export const CREATE_FEED_REQUEST = "CREATE_FEED_REQUEST" as const;
 export const CREATE_FEED_SUCCESS = "CREATE_FEED_SUCCESS" as const;
 export const CREATE_FEED_FAILURE = "CREATE_FEED_FAILURE" as const;
 
+export const FAVORITE_FEED_REQUEST = "FAVORITE_FEED_REQUEST" as const;
+export const FAVORITE_FEED_SUCCESS = "FAVORITE_FEED_SUCCESS" as const;
+export const FAVORITE_FEED_FAILURE = "FAVORITE_FEED_FAILURE" as const;
+
 export const getFeedListRequest = () => {
   return {
     type: GET_FEED_LIST_REQUEST,
@@ -44,6 +48,31 @@ export const createFeedFailure = () => {
     type: CREATE_FEED_FAILURE,
   };
 };
+
+export const favoriteFeedRequest = () => {
+  return {
+    type: FAVORITE_FEED_REQUEST,
+  };
+};
+export const favoriteFeedSuccess = (feedId: FeedInfo["id"]) => {
+  return {
+    type: FAVORITE_FEED_SUCCESS,
+    feedId,
+  };
+};
+export const favoriteFeedFailure = () => {
+  return {
+    type: FAVORITE_FEED_FAILURE,
+  };
+};
+
+export const favoriteFeed =
+  (item: FeedInfo): TypeFeedListThunkAction =>
+  async (dispatch) => {
+    dispatch(favoriteFeedRequest());
+    await sleep(1000);
+    dispatch(favoriteFeedSuccess(item.id));
+  };
 
 export const createFeed =
   (
@@ -128,4 +157,7 @@ export type TypeFeedListActions =
   | ReturnType<typeof getFeedListFailure>
   | ReturnType<typeof createFeedRequest>
   | ReturnType<typeof createFeedSuccess>
-  | ReturnType<typeof createFeedFailure>;
+  | ReturnType<typeof createFeedFailure>
+  | ReturnType<typeof favoriteFeedRequest>
+  | ReturnType<typeof favoriteFeedSuccess>
+  | ReturnType<typeof favoriteFeedFailure>;
